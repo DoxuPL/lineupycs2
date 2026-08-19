@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0d12" />
+    <title>Lineupbook — CS2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#top"><span class="brand-mark">L</span> LINEUP<span>BOOK</span></a>
+      <nav><a href="#mapy">Mapy</a><a href="#lineupy">Lineupy</a></nav>
+      <button class="add-button" id="open-modal">+ Dodaj lineup</button>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">CS2 · ACTIVE DUTY · ESL</p>
+          <h1>Twoje zagrania.<br /><em>Każda</em> mapa.</h1>
+          <p class="intro">Zapisuj smoke’i, molotovy i flashbang’i w jednym miejscu. Wybierz mapę, przeglądaj setupy i dodawaj własne.</p>
+          <a class="primary-button" href="#mapy">Zobacz mapy <span>↓</span></a>
+        </div>
+        <div class="hero-orb" aria-hidden="true"><span>CS2</span><i></i><b></b></div>
+      </section>
+
+      <section id="mapy" class="maps-section">
+        <div class="section-heading"><div><p class="eyebrow">MAP POOL 2026</p><h2>Wybierz mapę</h2></div><span id="map-count">7 map</span></div>
+        <div class="map-grid" id="map-grid"></div>
+      </section>
+
+      <section id="lineupy" class="lineups-section">
+        <div class="section-heading"><div><p class="eyebrow" id="lineups-label">WSZYSTKIE MAPY</p><h2 id="lineups-title">Najnowsze lineupy</h2></div><button class="text-button" id="clear-filter" hidden>Pokaż wszystkie</button></div>
+        <div class="filters" role="group" aria-label="Filtr typu granatu">
+          <button class="filter active" data-type="all">Wszystkie</button><button class="filter" data-type="Smoke">Smoke</button><button class="filter" data-type="Flash">Flash</button><button class="filter" data-type="Molotov">Molotov</button><button class="filter" data-type="HE">HE</button>
+        </div>
+        <div class="lineup-grid" id="lineup-grid"></div>
+        <div class="empty-state" id="empty-state" hidden><p>Nie ma jeszcze lineupów w tej kategorii.</p><button class="add-button" id="empty-add">Dodaj pierwszy</button></div>
+      </section>
+    </main>
+
+    <dialog id="lineup-modal">
+      <form id="lineup-form">
+        <div class="modal-header"><div><p class="eyebrow">NOWY LINEUP</p><h2>Dodaj zagranie</h2></div><button type="button" class="close" id="close-modal" aria-label="Zamknij">×</button></div>
+        <label>Nazwa lineupu<input required name="title" maxlength="70" placeholder="np. Smoke na window" /></label>
+        <div class="two-columns"><label>Mapa<select required name="map" id="map-select"></select></label><label>Typ granatu<select required name="type"><option>Smoke</option><option>Flash</option><option>Molotov</option><option>HE</option><option>Decoy</option></select></label></div>
+        <label>Opis (opcjonalnie)<textarea name="description" maxlength="240" placeholder="Skąd rzucać i co odcina?"></textarea></label>
+        <label class="file-input">Zdjęcie lineupu<input required name="image" type="file" accept="image/*" /><span id="file-name">Wybierz plik JPG, PNG lub WEBP</span></label>
+        <p class="form-note" id="form-note">Zdjęcie zostanie przesłane do Supabase.</p>
+        <button class="submit-button" type="submit">Zapisz lineup</button>
+      </form>
+    </dialog>
+    <template id="lineup-template"><article class="lineup-card"><img loading="lazy" /><div class="card-content"><div class="card-meta"><span class="grenade"></span><span class="map-name"></span></div><h3></h3><p></p></div></article></template>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
